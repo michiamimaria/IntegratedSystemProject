@@ -1,0 +1,48 @@
+﻿@model List<BookStore.Domain.Models.Domain.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="container">
+
+<h1>Books</h1>
+<a asp-action="Create" class="btn btn-success">Create New</a>
+
+  @for(int i=0;i<Model.Count; i++)
+    {
+        var item = Model[i];
+        if(i % 3 == 0)
+        {
+            @:<div class="row justify-content-between">
+        }
+        <div class="col-3 m-4 d-flex">
+            <div class="card" style="width: 20rem;">
+                <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Genre</p>
+                    <h6>Price: @item.Price</h6>
+                    <h6>Year: @item.Year</h6>
+                    <br />
+                
+                    <div class="d-flexjustify-content-between">
+                        <a asp-controller="Books" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-controller="Books" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-success btn-sm">Add to Cart</a>
+                        <a asp-action="Details" class="btn btn-info btn-sm" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        if(i % 3 == 2)
+        {
+            @:</div>
+        }
+    }
+</div>
